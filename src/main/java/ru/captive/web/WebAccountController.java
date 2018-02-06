@@ -55,7 +55,7 @@ public class WebAccountController {
 
     @RequestMapping("/login")
     public String afterLogin(@ModelAttribute("account") @Validated(Account.Existing.class) Account account) {
-        String redirectPageString = "redirect:/";
+        final String redirectPageString = "redirect:/";
         if (account == null) {
             return redirectPageString;
         }

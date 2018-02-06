@@ -21,7 +21,7 @@ public class CaptiveServiceImpl implements CaptiveService {
         if (!unblockEnabled) {
             return;
         }
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+        final HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
                 .getRequest();
         final String ip = request.getRemoteAddr();
         final String macByIpQuery = "sudo /usr/sbin/arp -an " + ip + " | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'";
