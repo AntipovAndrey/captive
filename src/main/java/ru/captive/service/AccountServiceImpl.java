@@ -40,4 +40,9 @@ public class AccountServiceImpl implements AccountService {
     public void delete(Account account) {
         accountDao.delete(account);
     }
+
+    @Override
+    public Account findByLogin(String login) {
+        return accountDao.findOneByLogin(login);
+    }
 }

@@ -3,5 +3,6 @@ package ru.captive.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.captive.model.Account;
 
-public interface AccountDao extends JpaRepository<Account, Long>{
+public interface AccountDao extends JpaRepository<Account, Long> {
+    Account findOneByLogin(String login);
 }

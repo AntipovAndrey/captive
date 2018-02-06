@@ -10,4 +10,6 @@ public interface AccountService {
     void save(Account account);
 
     void delete(Account account);
+
+    Account findByLogin(String login);
 }

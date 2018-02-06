@@ -48,4 +48,13 @@ public class Account extends BaseModel {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }
