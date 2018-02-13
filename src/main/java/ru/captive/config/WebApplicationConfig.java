@@ -15,7 +15,7 @@ public class WebApplicationConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/notFound").setViewName("forward:/");
+        registry.addViewController("/notFound").setViewName("redirect:/");
     }
 
 
