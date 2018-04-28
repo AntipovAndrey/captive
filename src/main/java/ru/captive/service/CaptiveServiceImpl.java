@@ -2,11 +2,11 @@ package ru.captive.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import ru.captive.util.LinuxSystemCall;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +17,9 @@ public class CaptiveServiceImpl implements CaptiveService {
 
     @Value("${captive.unblock}")
     private Boolean unblockEnabled;
+
+    @Autowired
+    private SystemCall systemCall;
 
     private static final String INTERFACE = "wlan0";
 
@@ -32,11 +35,11 @@ public class CaptiveServiceImpl implements CaptiveService {
         LOGGER.info("IP " + ip);
         final String macByIpQuery = "sudo /usr/sbin/arp -an " + ip +
                 " | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'";
-        final String macAddress = new LinuxSystemCall(macByIpQuery).call();
+        final String macAddress = systemCall.call(macByIpQuery);
         LOGGER.info("MAC " + macAddress);
         final String ipTablesQuery = "sudo iptables -t nat -I PREROUTING -i " + INTERFACE +
                 " -p tcp -m mac --mac-source " + macAddress + " -j ACCEPT";
-        new LinuxSystemCall(ipTablesQuery).call();
+        systemCall.call(ipTablesQuery);
         LOGGER.info("Query " + ipTablesQuery);
     }
 }

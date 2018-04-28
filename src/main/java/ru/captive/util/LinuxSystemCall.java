@@ -2,22 +2,19 @@ package ru.captive.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import ru.captive.service.SystemCall;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class LinuxSystemCall {
+@Service
+public class LinuxSystemCall implements SystemCall {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LinuxSystemCall.class);
 
-    private String query;
-
-    public LinuxSystemCall(String query) {
-        this.query = query;
-    }
-
-    public String call() {
+    public String call(String query) {
         String[] bashQuery = {
                 "/bin/bash",
                 "-c",
